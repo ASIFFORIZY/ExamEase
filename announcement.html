@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Announcements | ExamEase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-blue-900 text-white flex flex-col min-h-screen">
+    <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase</div>
+    <nav class="flex-1 p-4 space-y-2">
+      <a href="adminDashboard.html" class="block py-2 px-4 rounded hover:bg-blue-700">Dashboard</a>
+      <a href="adminclassroutine.html" class="block py-2 px-4 rounded hover:bg-blue-700">Class Routine</a>
+      <a href="adminexamroutine.html" class="block py-2 px-4 rounded hover:bg-blue-700">Exam Routine</a>
+      <a href="aischeduler.html" class="block py-2 px-4 rounded hover:bg-blue-700">AI Scheduler</a>
+      <a href="announcement.html" class="block py-2 px-4 rounded bg-blue-700 font-semibold">Announcements</a>
+      <a href="emptyroom.html" class="block py-2 px-4 rounded hover:bg-blue-700">View Empty Room</a>
+      <a href="adminusers.html" class="block py-2 px-4 rounded hover:bg-blue-700">Manage Users</a>
+      <a href="index.html" class="block py-2 px-4 rounded hover:bg-red-600 mt-10">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-6">
+    <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-xl p-6">
+      <h1 id="roleHeading" class="text-3xl font-bold mb-6 text-center text-blue-700">📢 Announcements</h1>
+
+      <!-- Role Selector -->
+      <div class="mb-6">
+        <label for="role" class="block mb-2 font-medium text-gray-700">Posting As:</label>
+        <select id="role" class="w-full p-2 border rounded">
+          <option value="Admin">Admin</option>
+          <option value="Teacher">Teacher</option>
+        </select>
+      </div>
+
+      <!-- Announcement Form -->
+      <form id="announcementForm" class="mb-6">
+        <label for="announcementInput" class="block mb-2 text-lg font-semibold text-gray-700">New Announcement:</label>
+        <textarea id="announcementInput" rows="4" class="w-full p-3 border border-gray-300 rounded-lg mb-4" placeholder="Write something to announce..." required></textarea>
+
+        <button type="submit" class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700">
+          Post Announcement
+        </button>
+      </form>
+
+      <!-- Announcement List -->
+      <div id="announcementList" class="space-y-4">
+        <!-- Dynamic announcements will appear here -->
+      </div>
+    </div>
+  </main>
+
+  <!-- JavaScript -->
+  <script>
+    const form = document.getElementById('announcementForm');
+    const input = document.getElementById('announcementInput');
+    const list = document.getElementById('announcementList');
+    const roleSelect = document.getElementById('role');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const content = input.value.trim();
+      const role = roleSelect.value;
+      if (!content) return;
+
+      const card = document.createElement('div');
+      card.className = "bg-gray-50 p-4 border rounded-lg shadow-sm";
+
+      const heading = document.createElement('div');
+      heading.className = "text-sm text-blue-600 font-semibold mb-2";
+      heading.textContent = `From: ${role} • ${new Date().toLocaleString()}`;
+
+      const text = document.createElement('p');
+      text.className = "text-gray-800 whitespace-pre-wrap";
+      text.textContent = content;
+
+      const delBtn = document.createElement('button');
+      delBtn.textContent = "Delete";
+      delBtn.className = "text-red-600 hover:underline mt-2 block";
+      delBtn.onclick = () => card.remove();
+
+      card.appendChild(heading);
+      card.appendChild(text);
+      card.appendChild(delBtn);
+      list.prepend(card);
+
+      input.value = "";
+    });
+  </script>
+
+</body>
+</html>

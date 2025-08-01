@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>View Empty Rooms | ExamEase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-blue-900 text-white flex flex-col min-h-screen">
+    <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase</div>
+    <nav class="flex-1 p-4 space-y-2">
+      <a href="adminDashboard.html" class="block py-2 px-4 rounded hover:bg-blue-700">Dashboard</a>
+      <a href="adminclassroutine.html" class="block py-2 px-4 rounded hover:bg-blue-700">Class Routine</a>
+      <a href="adminexamroutine.html" class="block py-2 px-4 rounded hover:bg-blue-700">Exam Routine</a>
+      <a href="aischeduler.html" class="block py-2 px-4 rounded hover:bg-blue-700">AI Scheduler</a>
+      <a href="announcement.html" class="block py-2 px-4 rounded hover:bg-blue-700">Announcements</a>
+      <a href="emptyroom.html" class="block py-2 px-4 rounded bg-blue-700 font-semibold">View Empty Room</a>
+      <a href="adminusers.html" class="block py-2 px-4 rounded hover:bg-blue-700">Manage Users</a>
+      <a href="index.html" class="block py-2 px-4 rounded hover:bg-red-600 mt-10">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-6">
+    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-xl p-6">
+      <h1 class="text-3xl font-bold mb-6 text-center text-blue-700">🏫 View Empty Rooms</h1>
+
+      <!-- Filters -->
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div>
+          <label for="day" class="block mb-2 font-medium text-gray-700">Select Day</label>
+          <select id="day" class="w-full p-2 border rounded">
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+          </select>
+        </div>
+        <div>
+          <label for="time" class="block mb-2 font-medium text-gray-700">Select Time Slot</label>
+          <select id="time" class="w-full p-2 border rounded">
+            <option value="8:30 AM - 10:00 AM">8:30 AM - 10:00 AM</option>
+            <option value="10:00 AM - 11:30 AM">10:00 AM - 11:30 AM</option>
+            <option value="11:30 AM - 1:00 PM">11:30 AM - 1:00 PM</option>
+            <option value="1:00 PM - 2:30 PM">1:00 PM - 2:30 PM</option>
+            <option value="2:30 PM - 4:00 PM">2:30 PM - 4:00 PM</option>
+            <option value="4:00 PM - 5:30 PM">4:00 PM - 5:30 PM</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div>
+        <h2 class="text-xl font-semibold text-gray-800 mb-3">Available Rooms:</h2>
+        <ul id="roomList" class="list-disc pl-6 text-gray-700 space-y-2">
+          <!-- Dynamic room list -->
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- Script -->
+  <script>
+    const daySelect = document.getElementById('day');
+    const timeSelect = document.getElementById('time');
+    const roomList = document.getElementById('roomList');
+
+    const emptyRoomsData = {
+      "Saturday": {
+        "8:30 AM - 10:00 AM": ["101", "102", "103", "110", "1210"],
+        "10:00 AM - 11:30 AM": ["104", "105", "106", "1310"],
+        "11:30 AM - 1:00 PM": ["107", "108", "1410"],
+        "1:00 PM - 2:30 PM": ["109", "110", "1110"],
+        "2:30 PM - 4:00 PM": ["112", "113", "114"],
+        "4:00 PM - 5:30 PM": ["115", "116", "117"]
+      },
+      "Sunday": {
+        "8:30 AM - 10:00 AM": ["101", "105", "110", "1310"],
+        "10:00 AM - 11:30 AM": ["102", "106", "1210"],
+        "11:30 AM - 1:00 PM": ["103", "107", "1410"],
+        "1:00 PM - 2:30 PM": ["104", "108", "1110"],
+        "2:30 PM - 4:00 PM": ["109", "113", "114"],
+        "4:00 PM - 5:30 PM": ["115", "117", "120"]
+      },
+      "Monday": {
+        "8:30 AM - 10:00 AM": ["101", "102", "110", "1410"],
+        "10:00 AM - 11:30 AM": ["103", "104", "1110"],
+        "11:30 AM - 1:00 PM": ["105", "106", "1210"],
+        "1:00 PM - 2:30 PM": ["107", "108", "1310"],
+        "2:30 PM - 4:00 PM": ["109", "110", "112"],
+        "4:00 PM - 5:30 PM": ["113", "114", "115"]
+      },
+      "Tuesday": {
+        "8:30 AM - 10:00 AM": ["101", "1110", "1210"],
+        "10:00 AM - 11:30 AM": ["102", "1310", "1410"],
+        "11:30 AM - 1:00 PM": ["103", "104", "105"],
+        "1:00 PM - 2:30 PM": ["106", "107", "108"],
+        "2:30 PM - 4:00 PM": ["109", "110", "111"],
+        "4:00 PM - 5:30 PM": ["112", "113", "114"]
+      },
+      "Wednesday": {
+        "8:30 AM - 10:00 AM": ["101", "102", "103"],
+        "10:00 AM - 11:30 AM": ["104", "105", "106"],
+        "11:30 AM - 1:00 PM": ["107", "108", "109"],
+        "1:00 PM - 2:30 PM": ["110", "111", "112"],
+        "2:30 PM - 4:00 PM": ["113", "114", "115"],
+        "4:00 PM - 5:30 PM": ["116", "117", "118"]
+      },
+      "Thursday": {
+        "8:30 AM - 10:00 AM": ["101", "102", "103"],
+        "10:00 AM - 11:30 AM": ["104", "105", "106"],
+        "11:30 AM - 1:00 PM": ["107", "108", "109"],
+        "1:00 PM - 2:30 PM": ["110", "111", "112"],
+        "2:30 PM - 4:00 PM": ["113", "114", "115"],
+        "4:00 PM - 5:30 PM": ["116", "117", "118"]
+      }
+    };
+
+    function updateRoomList() {
+      const selectedDay = daySelect.value;
+      const selectedTime = timeSelect.value;
+
+      const availableRooms = (emptyRoomsData[selectedDay] && emptyRoomsData[selectedDay][selectedTime]) || [];
+
+      roomList.innerHTML = "";
+
+      if (availableRooms.length === 0) {
+        roomList.innerHTML = "<li class='text-gray-500'>No empty rooms available at this time.</li>";
+      } else {
+        availableRooms.forEach(room => {
+          const li = document.createElement('li');
+          li.textContent = room;
+          roomList.appendChild(li);
+        });
+      }
+    }
+
+    daySelect.addEventListener('change', updateRoomList);
+    timeSelect.addEventListener('change', updateRoomList);
+
+    // Initialize on load
+    updateRoomList();
+  </script>
+
+</body>
+</html>

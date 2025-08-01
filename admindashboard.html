@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard | ExamEase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="flex h-screen bg-gray-100 font-sans">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-blue-900 text-white flex flex-col">
+    <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase</div>
+    <nav class="flex-1 p-4 space-y-2">
+      <a href="adminDashboard.html" class="block py-2 px-4 rounded bg-blue-700 font-semibold">Dashboard</a>
+      <a href="adminclassroutine.html" class="block py-2 px-4 rounded hover:bg-blue-700">Class Routine</a>
+      <a href="adminexamroutine.html" class="block py-2 px-4 rounded hover:bg-blue-700">Exam Routine</a>
+      <a href="aischeduler.html" class="block py-2 px-4 rounded hover:bg-blue-700">AI Scheduler</a>
+      <a href="announcement.html" class="block py-2 px-4 rounded hover:bg-blue-700">Announcements</a>
+      <a href="emptyroom.html" class="block py-2 px-4 rounded hover:bg-blue-700">View Empty Room</a>
+      <a href="adminusers.html" class="block py-2 px-4 rounded hover:bg-blue-700">Manage Users</a>
+      <a href="index.html" class="block py-2 px-4 rounded hover:bg-red-600 mt-10">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-6 overflow-y-auto">
+    <header class="flex flex-col items-center mb-8 space-y-4">
+      <h1 class="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
+    </header>
+
+    <!-- Summary Cards -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+        <h2 class="text-xl font-semibold mb-2">Total Students</h2>
+        <p class="text-3xl font-bold text-blue-700">1,250</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+        <h2 class="text-xl font-semibold mb-2">Total Teachers</h2>
+        <p class="text-3xl font-bold text-blue-700">85</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+        <h2 class="text-xl font-semibold mb-2">Upcoming Exams</h2>
+        <p class="text-3xl font-bold text-blue-700">5</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+        <h2 class="text-xl font-semibold mb-2">AI Schedules Generated</h2>
+        <p class="text-3xl font-bold text-blue-700">120</p>
+      </div>
+    </section>
+
+    <!-- Attendance Graph -->
+    <section class="bg-white p-6 rounded-lg shadow mb-8">
+      <h2 class="text-2xl font-semibold mb-4">Student & Teacher Attendance</h2>
+      <div class="h-72 w-full">
+        <canvas id="performanceChart" class="w-full h-full"></canvas>
+      </div>
+    </section>
+
+    <!-- Placeholder for further content -->
+    <section class="bg-white p-6 rounded-lg shadow">
+      <h2 class="text-2xl font-semibold mb-4">Recent Activity</h2>
+      <p class="text-gray-600">No recent activity to display.</p>
+    </section>
+  </main>
+
+  <!-- Chart.js Configuration -->
+  <script>
+    const ctx = document.getElementById('performanceChart').getContext('2d');
+
+    const performanceChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [
+          {
+            label: 'Student Attendance (%)',
+            data: [75, 80, 70, 85, 90, 88, 92],
+            backgroundColor: 'rgba(139, 92, 246, 0.7)', // Purple
+            borderColor: 'rgba(139, 92, 246, 1)',
+            borderWidth: 1
+          },
+          {
+            label: 'Teacher Attendance (%)',
+            data: [65, 70, 68, 72, 75, 80, 78],
+            backgroundColor: 'rgba(251, 146, 60, 0.7)', // Orange
+            borderColor: 'rgba(251, 146, 60, 1)',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+              stepSize: 10,
+              callback: value => value + '%'
+            },
+            title: {
+              display: true,
+              text: 'Attendance Percentage'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Month'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'top'
+          },
+          tooltip: {
+            callbacks: {
+              label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%'
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

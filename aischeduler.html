@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Scheduler | ExamEase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex font-sans">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-blue-900 text-white flex flex-col min-h-screen">
+    <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase</div>
+    <nav class="flex-1 p-4 space-y-2">
+      <a href="adminDashboard.html" class="block py-2 px-4 rounded hover:bg-blue-700">Dashboard</a>
+      <a href="adminclassroutine.html" class="block py-2 px-4 rounded hover:bg-blue-700">Class Routine</a>
+      <a href="adminexamroutine.html" class="block py-2 px-4 rounded hover:bg-blue-700">Exam Routine</a>
+      <a href="aischeduler.html" class="block py-2 px-4 rounded bg-blue-700 font-semibold">AI Scheduler</a> <!-- Active -->
+      <a href="announcement.html" class="block py-2 px-4 rounded hover:bg-blue-700">Announcements</a>
+      <a href="emptyroom.html" class="block py-2 px-4 rounded hover:bg-blue-700">View Empty Room</a>
+      <a href="adminusers.html" class="block py-2 px-4 rounded hover:bg-blue-700">Manage Users</a>
+      <a href="index.html" class="block py-2 px-4 rounded hover:bg-red-600 mt-10">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-6 max-w-4xl mx-auto overflow-auto">
+
+    <div class="bg-white shadow-md rounded-xl p-6">
+      <h1 class="text-3xl font-bold mb-6 text-center text-indigo-700">🧠 AI Scheduler</h1>
+
+      <!-- Prompt Input -->
+      <label for="promptInput" class="block mb-2 text-lg font-semibold text-gray-700">Enter Prompt:</label>
+      <textarea
+        id="promptInput"
+        rows="4"
+        class="w-full p-3 border rounded-lg mb-4"
+        placeholder="e.g. Generate a class routine for SWE, Batch 42, Section G..."
+      ></textarea>
+
+      <!-- Buttons -->
+      <div class="flex items-center gap-4 mb-4">
+        <button onclick="generateImage()" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
+          Generate Routine
+        </button>
+        <a
+          id="downloadLink"
+          href="#"
+          download="summer-2025.png"
+          class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 hidden"
+        >
+          Download
+        </a>
+      </div>
+
+      <!-- Image Display -->
+      <div
+        id="imageContainer"
+        class="bg-gray-50 border rounded-lg p-4 flex justify-center items-center min-h-[300px]"
+      >
+        <p class="text-gray-500" id="placeholderText">Routine image will appear here...</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- JavaScript -->
+  <script>
+    function generateImage() {
+      const prompt = document.getElementById('promptInput').value.trim();
+      const imageContainer = document.getElementById('imageContainer');
+      const placeholderText = document.getElementById('placeholderText');
+      const downloadLink = document.getElementById('downloadLink');
+
+      if (!prompt) {
+        placeholderText.innerText = '⚠️ Please enter a prompt.';
+        return;
+      }
+
+      // Path goes up one level from /admin/ to root images folder
+      const imagePath = '../images/summer-2025.png';
+
+      imageContainer.innerHTML = `
+        <img src="${imagePath}" alt="Generated Routine" class="max-w-full h-auto rounded shadow-md" />
+      `;
+
+      downloadLink.href = imagePath;
+      downloadLink.classList.remove('hidden');
+    }
+  </script>
+
+</body>
+</html>
