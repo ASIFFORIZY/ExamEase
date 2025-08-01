@@ -5,80 +5,109 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Exam Routine Management | ExamEase</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {},
+      },
+    };
+  </script>
 </head>
-<body class="bg-gray-100 min-h-screen flex font-sans">
+<body class="bg-gray-100 min-h-screen font-sans">
+
+  <!-- Mobile Top Bar -->
+  <div class="sm:hidden bg-blue-900 text-white flex items-center justify-between px-4 py-3">
+    <div class="text-xl font-bold">ExamEase</div>
+    <button id="mobileMenuToggle" class="text-white focus:outline-none">
+      ☰
+    </button>
+  </div>
 
   <!-- Sidebar -->
-  <aside class="w-64 bg-blue-900 text-white flex flex-col min-h-screen">
-    <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase</div>
-    <nav class="flex-1 p-4 space-y-2">
-      <a href="admindashboard.html" class="block py-2 px-4 rounded hover:bg-blue-700">Dashboard</a>
-      <a href="adminclassroutine.html" class="block py-2 px-4 rounded hover:bg-blue-700">Class Routine</a>
-      <a href="adminexamroutine.html" class="block py-2 px-4 rounded bg-blue-700 font-semibold">Exam Routine</a> <!-- Active -->
-      <a href="aischeduler.html" class="block py-2 px-4 rounded hover:bg-blue-700">AI Scheduler</a>
-      <a href="announcement.html" class="block py-2 px-4 rounded hover:bg-blue-700">Announcements</a>
-      <a href="emptyroom.html" class="block py-2 px-4 rounded hover:bg-blue-700">View Empty Room</a>
-      <a href="adminusers.html" class="block py-2 px-4 rounded hover:bg-blue-700">Manage Users</a>
-      <a href="index.html" class="block py-2 px-4 rounded hover:bg-red-600 mt-10">Logout</a>
-    </nav>
-  </aside>
+  <div class="flex">
+    <aside id="sidebar" class="w-64 bg-blue-900 text-white flex-col min-h-screen p-4 hidden sm:flex">
+      <div class="text-2xl font-bold mb-4">ExamEase</div>
+      <nav class="space-y-2">
+        <a href="admindashboard.html" class="block py-2 px-4 rounded hover:bg-blue-700">Dashboard</a>
+        <a href="adminclassroutine.html" class="block py-2 px-4 rounded hover:bg-blue-700">Class Routine</a>
+        <a href="adminexamroutine.html" class="block py-2 px-4 rounded bg-blue-700 font-semibold">Exam Routine</a>
+        <a href="aischeduler.html" class="block py-2 px-4 rounded hover:bg-blue-700">AI Scheduler</a>
+        <a href="announcement.html" class="block py-2 px-4 rounded hover:bg-blue-700">Announcements</a>
+        <a href="emptyroom.html" class="block py-2 px-4 rounded hover:bg-blue-700">View Empty Room</a>
+        <a href="adminusers.html" class="block py-2 px-4 rounded hover:bg-blue-700">Manage Users</a>
+        <a href="index.html" class="block py-2 px-4 rounded hover:bg-red-600 mt-10">Logout</a>
+      </nav>
+    </aside>
 
-  <!-- Main content -->
-  <main class="flex-1 p-6 max-w-4xl mx-auto overflow-auto">
+    <!-- Main Content -->
+    <main class="flex-1 p-4 sm:p-6 max-w-4xl mx-auto overflow-auto">
 
-    <!-- Header -->
-    <header class="mb-6">
-      <h1 class="text-3xl font-bold text-blue-900">Admin - Exam Routine Management</h1>
-    </header>
+      <!-- Header -->
+      <header class="mb-6">
+        <h1 class="text-2xl sm:text-3xl font-bold text-blue-900">Admin - Exam Routine Management</h1>
+      </header>
 
-    <!-- Add Exam Routine Form -->
-    <section class="bg-white p-6 rounded shadow mb-8">
-      <h2 class="text-xl font-semibold mb-4">Add New Exam Routine</h2>
-      <form id="examRoutineForm" class="space-y-4">
-        <input
-          type="text"
-          id="examTitle"
-          placeholder="Exam Routine Title (e.g., SWE Final Exam)"
-          class="w-full border p-2 rounded"
-          required
-        />
-        <input
-          type="text"
-          id="examLink"
-          placeholder="Routine Link (Image URL or PDF URL)"
-          class="w-full border p-2 rounded"
-          required
-        />
-        <button
-          type="submit"
-          class="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded"
-        >
-          Add Exam Routine
-        </button>
-      </form>
-    </section>
+      <!-- Add Exam Routine Form -->
+      <section class="bg-white p-4 sm:p-6 rounded shadow mb-6">
+        <h2 class="text-lg sm:text-xl font-semibold mb-4">Add New Exam Routine</h2>
+        <form id="examRoutineForm" class="space-y-4">
+          <input
+            type="text"
+            id="examTitle"
+            placeholder="Exam Routine Title"
+            class="w-full border p-2 rounded"
+            required
+          />
+          <input
+            type="text"
+            id="examLink"
+            placeholder="Routine Link (Image URL or PDF URL)"
+            class="w-full border p-2 rounded"
+            required
+          />
+          <button
+            type="submit"
+            class="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded w-full sm:w-auto"
+          >
+            Add Exam Routine
+          </button>
+        </form>
+      </section>
 
-    <!-- Exam Routine Table -->
-    <section class="bg-white p-6 rounded shadow">
-      <h2 class="text-xl font-semibold mb-4">Uploaded Exam Routines</h2>
-      <table class="w-full table-auto border">
-        <thead class="bg-gray-200">
-          <tr>
-            <th class="p-2 border">Title</th>
-            <th class="p-2 border">Link</th>
-            <th class="p-2 border">Actions</th>
-          </tr>
-        </thead>
-        <tbody id="examRoutineTable">
-          <!-- Exam routines will appear here -->
-        </tbody>
-      </table>
-    </section>
+      <!-- Exam Routine Table -->
+      <section class="bg-white p-4 sm:p-6 rounded shadow">
+        <h2 class="text-lg sm:text-xl font-semibold mb-4">Uploaded Exam Routines</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full table-auto border text-sm sm:text-base">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2 border">Title</th>
+                <th class="p-2 border">Link</th>
+                <th class="p-2 border">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="examRoutineTable">
+              <!-- Content from JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-  </main>
+    </main>
+  </div>
 
-  <!-- Script -->
+  <!-- JavaScript -->
   <script>
+    const sidebar = document.getElementById("sidebar");
+    const mobileToggle = document.getElementById("mobileMenuToggle");
+
+    if (mobileToggle) {
+      mobileToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("hidden");
+        sidebar.classList.toggle("flex");
+      });
+    }
+
     const form = document.getElementById('examRoutineForm');
     const examRoutineTable = document.getElementById('examRoutineTable');
     let examRoutines = [];
@@ -87,7 +116,6 @@
       e.preventDefault();
       const title = document.getElementById('examTitle').value.trim();
       const link = document.getElementById('examLink').value.trim();
-
       if (title && link) {
         examRoutines.push({ title, link });
         renderTable();
