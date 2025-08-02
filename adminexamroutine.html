@@ -18,14 +18,14 @@
   <!-- Mobile Top Bar -->
   <div class="sm:hidden bg-blue-900 text-white flex items-center justify-between px-4 py-3">
     <div class="text-xl font-bold">ExamEase</div>
-    <button id="mobileMenuToggle" class="text-white focus:outline-none">
+    <button id="mobileMenuToggle" class="text-white text-2xl focus:outline-none">
       ☰
     </button>
   </div>
 
-  <div class="flex">
+  <div class="flex relative">
     <!-- Sidebar -->
-    <aside id="sidebar" class="w-64 bg-blue-900 text-white flex-col min-h-screen p-4 hidden sm:flex fixed sm:relative z-30 sm:z-auto transition-all duration-300 ease-in-out transform -translate-x-full sm:translate-x-0">
+    <aside id="sidebar" class="w-64 bg-blue-900 text-white flex-col min-h-screen p-4 hidden sm:flex fixed sm:relative z-30 sm:z-auto top-0 left-0 h-full transition-transform duration-300 ease-in-out -translate-x-full sm:translate-x-0">
       <div class="text-2xl font-bold mb-4">ExamEase</div>
       <nav class="space-y-2">
         <a href="admindashboard.html" class="block py-2 px-4 rounded hover:bg-blue-700">Dashboard</a>
