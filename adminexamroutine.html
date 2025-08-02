@@ -23,9 +23,9 @@
     </button>
   </div>
 
-  <!-- Sidebar -->
   <div class="flex">
-    <aside id="sidebar" class="w-64 bg-blue-900 text-white flex-col min-h-screen p-4 hidden sm:flex">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-64 bg-blue-900 text-white flex-col min-h-screen p-4 hidden sm:flex fixed sm:relative z-30 sm:z-auto transition-all duration-300 ease-in-out transform -translate-x-full sm:translate-x-0">
       <div class="text-2xl font-bold mb-4">ExamEase</div>
       <nav class="space-y-2">
         <a href="admindashboard.html" class="block py-2 px-4 rounded hover:bg-blue-700">Dashboard</a>
@@ -40,7 +40,7 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 p-4 sm:p-6 max-w-4xl mx-auto overflow-auto">
+    <main class="flex-1 p-4 sm:p-6 max-w-4xl mx-auto sm:ml-64 overflow-auto">
 
       <!-- Header -->
       <header class="mb-6">
@@ -104,7 +104,7 @@
     if (mobileToggle) {
       mobileToggle.addEventListener("click", () => {
         sidebar.classList.toggle("hidden");
-        sidebar.classList.toggle("flex");
+        sidebar.classList.toggle("-translate-x-full");
       });
     }
 
