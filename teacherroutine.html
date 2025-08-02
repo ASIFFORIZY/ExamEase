@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teacher Routine | ExamEase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('mobileSidebar');
+      sidebar.classList.toggle('-translate-x-full');
+    }
+
+    function showTeacherRoutine() {
+      const imageSection = document.getElementById('teacherRoutineImageSection');
+      imageSection.classList.remove('hidden');
+      imageSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  </script>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen">
+
+  <!-- Mobile Top Bar -->
+  <header class="fixed top-0 left-0 w-full bg-blue-900 text-white p-4 flex justify-between items-center md:hidden z-50">
+    <div class="text-xl font-bold">ExamEase</div>
+    <button onclick="toggleSidebar()" class="focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+        <path d="M4 6h16M4 12h16M4 18h16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Mobile Sidebar -->
+  <div id="mobileSidebar" class="fixed top-0 left-0 w-64 h-full bg-blue-900 text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-40 md:hidden">
+    <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase</div>
+    <nav class="flex flex-col p-4 space-y-2">
+      <a href="studentdashboard.html" class="py-2 px-4 rounded hover:bg-blue-700">Dashboard</a>
+      <a href="studentclassroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Class Routine</a>
+      <a href="studentexamroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Exam Routine</a>
+      <a href="teacherroutine.html" class="py-2 px-4 rounded bg-blue-700">Teacher Routine</a>
+      <a href="studentannouncement.html" class="py-2 px-4 rounded hover:bg-blue-700">Announcements</a>
+      <a href="index.html" class="py-2 px-4 rounded hover:bg-red-600">Logout</a>
+    </nav>
+  </div>
+
+  <!-- Page Content -->
+  <div class="flex pt-16 md:pt-0">
+    <!-- Desktop Sidebar -->
+    <aside class="hidden md:block w-64 bg-blue-900 text-white min-h-screen">
+      <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase</div>
+      <nav class="flex flex-col p-4 space-y-2">
+        <a href="studentdashboard.html" class="py-2 px-4 rounded hover:bg-blue-700">Dashboard</a>
+        <a href="studentclassroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Class Routine</a>
+        <a href="studentexamroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Exam Routine</a>
+        <a href="teacherroutine.html" class="py-2 px-4 rounded bg-blue-700">Teacher Routine</a>
+        <a href="studentannouncement.html" class="py-2 px-4 rounded hover:bg-blue-700">Announcements</a>
+        <a href="index.html" class="py-2 px-4 rounded hover:bg-red-600">Logout</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6 flex justify-center">
+      <div class="bg-white rounded-lg shadow p-6 w-full max-w-xl">
+        <h1 class="text-2xl font-bold mb-6 text-gray-800 text-center">View Teacher Routine</h1>
+
+        <!-- Teacher Initial Input -->
+        <div class="mb-4">
+          <label for="teacherInitial" class="block text-gray-700 font-medium mb-1">Teacher Initial</label>
+          <input type="text" id="teacherInitial" placeholder="e.g., LA" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring focus:border-blue-500" />
+        </div>
+
+        <!-- View Button -->
+        <button onclick="showTeacherRoutine()" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-2 rounded transition duration-200 w-full">
+          View Routine
+        </button>
+
+        <!-- Teacher Routine Image Section -->
+        <div id="teacherRoutineImageSection" class="hidden mt-6 text-center">
+          <h2 class="text-lg font-semibold mb-3 text-gray-800">Teacher Routine Preview:</h2>
+          <img src="./images/la.jpg" alt="Teacher Routine" class="w-full rounded-lg border shadow mb-4" />
+          <a href="./images/la.jpg" download class="inline-block bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg font-medium transition duration-200">
+            Download Routine
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

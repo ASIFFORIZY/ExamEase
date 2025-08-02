@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Announcements | ExamEase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('mobileSidebar');
+      sidebar.classList.toggle('-translate-x-full');
+    }
+  </script>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen">
+
+  <!-- Mobile Top Bar -->
+  <header class="fixed top-0 left-0 w-full bg-blue-900 text-white p-4 flex justify-between items-center md:hidden z-50">
+    <div class="text-xl font-bold">ExamEase</div>
+    <button onclick="toggleSidebar()" class="focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+        <path d="M4 6h16M4 12h16M4 18h16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Mobile Sidebar -->
+  <div id="mobileSidebar" class="fixed top-0 left-0 w-64 h-full bg-blue-900 text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-40 md:hidden">
+    <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase</div>
+    <nav class="flex flex-col p-4 space-y-2">
+      <a href="studentdashboard.html" class="py-2 px-4 rounded hover:bg-blue-700">Dashboard</a>
+      <a href="studentclassroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Class Routine</a>
+      <a href="studentexamroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Exam Routine</a>
+      <a href="teacherroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Teacher Routine</a>
+      <a href="studentannouncement.html" class="py-2 px-4 rounded bg-blue-700">Announcements</a>
+      <a href="index.html" class="py-2 px-4 rounded hover:bg-red-600">Logout</a>
+    </nav>
+  </div>
+
+  <!-- Page Layout -->
+  <div class="flex pt-16 md:pt-0">
+    <!-- Desktop Sidebar -->
+    <aside class="hidden md:block w-64 bg-blue-900 text-white min-h-screen">
+      <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase</div>
+      <nav class="flex flex-col p-4 space-y-2">
+        <a href="studentdashboard.html" class="py-2 px-4 rounded hover:bg-blue-700">Dashboard</a>
+        <a href="studentclassroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Class Routine</a>
+        <a href="studentexamroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Exam Routine</a>
+        <a href="teacherroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Teacher Routine</a>
+        <a href="studentannouncement.html" class="py-2 px-4 rounded bg-blue-700">Announcements</a>
+        <a href="index.html" class="py-2 px-4 rounded hover:bg-red-600">Logout</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 px-4 py-8 md:px-8 lg:px-16 bg-gray-100">
+      <h1 class="text-4xl font-bold text-center text-blue-900 mb-10">📢 Latest Announcements</h1>
+
+      <!-- Announcement List -->
+      <div class="space-y-6 max-w-4xl mx-auto">
+
+        <!-- Announcement Card -->
+        <div class="bg-white border-l-4 border-blue-600 shadow transition-shadow duration-300 hover:shadow-2xl rounded-lg p-6">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-1">🎓 Midterm Exam Starts from 15th August</h2>
+          <p class="text-gray-600 mb-2">All students are advised to check the exam routine. Best of luck!</p>
+          <p class="text-sm text-gray-500">📅 Posted on: 1st August 2025</p>
+        </div>
+
+        <div class="bg-white border-l-4 border-yellow-500 shadow transition-shadow duration-300 hover:shadow-2xl rounded-lg p-6">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-1">📢 Class Schedule Updated</h2>
+          <p class="text-gray-600 mb-2">Routine for batch 42, section G has been updated. Please review the new schedule.</p>
+          <p class="text-sm text-gray-500">📅 Posted on: 28th July 2025</p>
+        </div>
+
+        <div class="bg-white border-l-4 border-red-500 shadow transition-shadow duration-300 hover:shadow-2xl rounded-lg p-6">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-1">📌 Project Submission Deadline</h2>
+          <p class="text-gray-600 mb-2">Submit your System Analysis & Design project by 10th August. Late submission will not be accepted.</p>
+          <p class="text-sm text-gray-500">📅 Posted on: 25th July 2025</p>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>
