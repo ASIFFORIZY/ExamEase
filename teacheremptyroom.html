@@ -51,109 +51,117 @@
   </aside>
 
   <!-- Main content -->
-  <main class="flex-1 md:ml-64 p-6 w-full max-w-5xl mx-auto mt-16 md:mt-0">
-    <!-- Header -->
-    <header class="mb-6">
-      <h1 class="text-3xl font-bold text-blue-900">View Empty Rooms</h1>
-    </header>
+    <main class="flex-1 sm:ml-50 p-6 w-full max-w-5xl mx-auto mt-16 sm:mt-0">
+      <!-- Header -->
+      <header class="mb-6">
+        <h1 class="text-3xl font-bold text-blue-900">View Empty Rooms</h1>
+      </header>
 
-    <!-- Filter section -->
-    <section class="bg-white p-6 rounded shadow mb-8">
-      <h2 class="text-xl font-semibold mb-4">Filter Empty Rooms</h2>
-      <form id="filterForm" class="space-y-4 sm:flex sm:space-x-4 sm:space-y-0 items-end">
-        <div class="flex-1">
-          <label for="day" class="block text-gray-700 mb-1">Select Day</label>
-          <select id="day" class="w-full border p-2 rounded" required>
-            <option value="" disabled selected>Choose a day</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-          </select>
-        </div>
-        <div class="flex-1">
-          <label for="timeSlot" class="block text-gray-700 mb-1">Select Time Slot</label>
-          <select id="timeSlot" class="w-full border p-2 rounded" required>
-            <option value="" disabled selected>Choose a time slot</option>
-            <option value="8:30-9:30">8:30 AM - 9:30 AM</option>
-            <option value="9:30-10:30">9:30 AM - 10:30 AM</option>
-            <option value="10:30-11:30">10:30 AM - 11:30 AM</option>
-            <option value="11:30-12:30">11:30 AM - 12:30 PM</option>
-            <option value="12:30-1:30">12:30 PM - 1:30 PM</option>
-            <option value="1:30-2:30">1:30 PM - 2:30 PM</option>
-            <option value="2:30-3:30">2:30 PM - 3:30 PM</option>
-            <option value="3:30-4:30">3:30 PM - 4:30 PM</option>
-            <option value="4:30-5:30">4:30 PM - 5:30 PM</option>
-          </select>
-        </div>
-        <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded">
-          Filter
-        </button>
-      </form>
-    </section>
+      <!-- Filter section -->
+      <section class="bg-white p-6 rounded shadow mb-8">
+        <h2 class="text-xl font-semibold mb-4">Filter Empty Rooms</h2>
+        <form id="filterForm" class="space-y-4 sm:flex sm:space-x-4 sm:space-y-0 items-end">
+          <div class="flex-1">
+            <label for="day" class="block text-gray-700 mb-1">Select Day</label>
+            <select id="day" class="w-full border p-2 rounded" required>
+              <option value="" disabled selected>Choose a day</option>
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+            </select>
+          </div>
+          <div class="flex-1">
+            <label for="timeSlot" class="block text-gray-700 mb-1">Select Time Slot</label>
+            <select id="timeSlot" class="w-full border p-2 rounded" required>
+              <option value="" disabled selected>Choose a time slot</option>
+              <!-- Options will be populated dynamically -->
+            </select>
+          </div>
+          <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded">
+            Filter
+          </button>
+        </form>
+      </section>
 
-    <!-- Empty Rooms Table -->
-    <section class="bg-white p-6 rounded shadow overflow-x-auto">
-      <h2 class="text-xl font-semibold mb-4">Empty Rooms</h2>
-      <table class="w-full table-auto border text-sm sm:text-base">
-        <thead class="bg-gray-200">
-          <tr>
-            <th class="p-2 border">Room Number</th>
-            <th class="p-2 border">Day</th>
-            <th class="p-2 border">Time Slot</th>
-            <th class="p-2 border">Remarks</th>
-          </tr>
-        </thead>
-        <tbody id="emptyRoomTable">
-          <tr>
-            <td colspan="4" class="p-4 text-center text-gray-600">
-              Please select day and time slot to view empty rooms.
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </main>
+      <!-- Empty Rooms Table -->
+      <section class="bg-white p-6 rounded shadow overflow-x-auto">
+        <h2 class="text-xl font-semibold mb-4">Empty Rooms</h2>
+        <table class="w-full table-auto border text-sm sm:text-base">
+          <thead class="bg-gray-200">
+            <tr>
+              <th class="p-2 border">Room Number</th>
+              <th class="p-2 border">Day</th>
+              <th class="p-2 border">Time Slot</th>
+              <th class="p-2 border">Remarks</th>
+            </tr>
+          </thead>
+          <tbody id="emptyRoomTable">
+            <tr>
+              <td colspan="4" class="p-4 text-center text-gray-600">
+                Please select day and time slot to view empty rooms.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
 
   <script>
-    // Generate rooms from 101 to 1410 (14 floors * 10 rooms each)
+    // Sidebar toggle for mobile
+    const menuBtn = document.getElementById('menu-btn');
+    const sidebar = document.getElementById('sidebar');
+    menuBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('-translate-x-full');
+    });
+
+    // Time slots (1.5 hours each)
+    const timeSlots = [
+      "8:30-10:00",
+      "10:00-11:30",
+      "11:30-1:00",
+      "1:00-2:30",
+      "2:30-4:00",
+      "4:00-5:30"
+    ];
+
+    // Populate the timeSlot dropdown dynamically
+    const timeSlotSelect = document.getElementById('timeSlot');
+    function populateTimeSlots() {
+      // Clear existing except the placeholder option
+      timeSlotSelect.innerHTML = '<option value="" disabled selected>Choose a time slot</option>';
+      timeSlots.forEach(slot => {
+        const option = document.createElement('option');
+        option.value = slot;
+        option.textContent = slot;
+        timeSlotSelect.appendChild(option);
+      });
+    }
+    populateTimeSlots();
+
+    // Generate room numbers (101 to 1410)
     function generateRoomNumbers() {
       const rooms = [];
       for (let floor = 1; floor <= 14; floor++) {
         for (let roomNum = 1; roomNum <= 10; roomNum++) {
-          let room = floor.toString() + (roomNum < 10 ? "0" + roomNum : roomNum.toString());
+          const room = floor.toString() + (roomNum < 10 ? "0" + roomNum : roomNum.toString());
           rooms.push(room);
         }
       }
       return rooms;
     }
-
     const rooms = generateRoomNumbers();
 
     // Days excluding Friday
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Saturday", "Sunday"];
 
-    // Time slots
-    const timeSlots = [
-      "8:30-9:30",
-      "9:30-10:30",
-      "10:30-11:30",
-      "11:30-12:30",
-      "12:30-1:30",
-      "1:30-2:30",
-      "2:30-3:30",
-      "3:30-4:30",
-      "4:30-5:30"
-    ];
-
-    // Simulate empty rooms data array
+    // Simulate empty rooms data
     const emptyRoomsData = [];
-
-    // Generate empty rooms data with 30% chance per slot
     function generateEmptyRoomsData() {
-      emptyRoomsData.length = 0;
+      emptyRoomsData.length = 0; // clear array
       rooms.forEach(room => {
         days.forEach(day => {
           timeSlots.forEach(time => {
@@ -169,58 +177,48 @@
         });
       });
     }
-
     generateEmptyRoomsData();
 
-    const filterForm = document.getElementById('filterForm');
+    // Table rendering
     const emptyRoomTable = document.getElementById('emptyRoomTable');
-
-    // Render table rows
     function renderTable(data) {
       emptyRoomTable.innerHTML = '';
-
       if (data.length === 0) {
         emptyRoomTable.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-gray-600">No empty rooms found.</td></tr>`;
         return;
       }
-
-      data.forEach(item => {
+      data.forEach(({room, day, time, remarks}) => {
         emptyRoomTable.innerHTML += `
           <tr>
-            <td class="p-2 border break-words max-w-xs">${item.room}</td>
-            <td class="p-2 border">${item.day}</td>
-            <td class="p-2 border">${item.time}</td>
-            <td class="p-2 border">${item.remarks}</td>
+            <td class="p-2 border break-words max-w-xs">${room}</td>
+            <td class="p-2 border">${day}</td>
+            <td class="p-2 border">${time}</td>
+            <td class="p-2 border">${remarks}</td>
           </tr>
         `;
       });
     }
 
-    // Utility: pick random n items from array (3 to 6)
+    // Random subset to limit output size
     function getRandomSubset(arr, min = 3, max = 6) {
       const count = Math.min(arr.length, Math.floor(Math.random() * (max - min + 1)) + min);
       const shuffled = arr.slice().sort(() => 0.5 - Math.random());
       return shuffled.slice(0, count);
     }
 
+    // Filter form handling
+    const filterForm = document.getElementById('filterForm');
     filterForm.addEventListener('submit', e => {
       e.preventDefault();
-
       const selectedDay = document.getElementById('day').value;
       const selectedTime = document.getElementById('timeSlot').value;
-
       if (!selectedDay || !selectedTime) {
-        alert("Please select both day and time slot.");
+        alert('Please select both day and time slot.');
         return;
       }
-
-      const filtered = emptyRoomsData.filter(room =>
-        room.day === selectedDay && room.time === selectedTime
-      );
-
-      const limitedRooms = getRandomSubset(filtered, 3, 6);
-
-      renderTable(limitedRooms);
+      const filtered = emptyRoomsData.filter(r => r.day === selectedDay && r.time === selectedTime);
+      const limited = getRandomSubset(filtered, 3, 6);
+      renderTable(limited);
     });
   </script>
 </body>
