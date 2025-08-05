@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teacher Dashboard | ExamEase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('mobileSidebar');
+      sidebar.classList.toggle('-translate-x-full');
+    }
+  </script>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen">
+
+  <!-- Mobile Top Bar -->
+  <header class="fixed top-0 left-0 w-full bg-blue-900 text-white p-4 flex justify-between items-center md:hidden z-50">
+    <div class="text-xl font-bold">ExamEase</div>
+    <button onclick="toggleSidebar()" class="focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+        <path d="M4 6h16M4 12h16M4 18h16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Mobile Sidebar -->
+  <div id="mobileSidebar" class="fixed top-0 left-0 w-64 h-full bg-blue-900 text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-40 md:hidden">
+    <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase</div>
+    <nav class="flex flex-col p-4 space-y-2">
+      <a href="#" class="py-2 px-4 rounded bg-blue-700">Dashboard</a>
+      <a href="teacherexamroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Exam Routine</a>
+      <a href="teacherroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Teacher Routine</a>
+      <a href="teacehrannouncement.html" class="py-2 px-4 rounded hover:bg-blue-700">Announcements</a>
+      <a href="teacehremptyroom.html" class="py-2 px-4 rounded hover:bg-blue-700">View Empty Room</a>
+      <a href="index.html" class="py-2 px-4 rounded hover:bg-red-600">Logout</a>
+    </nav>
+  </div>
+
+  <!-- Desktop Sidebar -->
+  <aside class="hidden md:block w-64 bg-blue-900 text-white min-h-screen fixed top-0 left-0 pt-16">
+    <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase</div>
+    <nav class="flex flex-col p-4 space-y-2">
+      <a href="#" class="py-2 px-4 rounded bg-blue-700">Dashboard</a>
+      <a href="teacherexamroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Exam Routine</a>
+      <a href="teacherroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Teacher Routine</a>
+      <a href="teacherannouncement.html" class="py-2 px-4 rounded hover:bg-blue-700">Announcements</a>
+      <a href="teacheremptyroom.html" class="py-2 px-4 rounded hover:bg-blue-700">View Empty Room</a>
+      <a href="index.html" class="py-2 px-4 rounded hover:bg-red-600">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="md:ml-64 pt-20 p-6 md:p-10 bg-gray-100 min-h-screen">
+    <h1 class="text-4xl font-bold text-blue-900 mb-10">Teacher Dashboard</h1>
+
+    <!-- Top Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+      <!-- Students Enrolled -->
+      <div class="bg-white rounded-lg shadow p-6 text-center">
+        <h2 class="text-xl font-semibold mb-3">Students Enrolled</h2>
+        <p class="text-5xl font-bold text-blue-700">128</p>
+        <p class="text-gray-600 mt-2">Total enrolled students</p>
+      </div>
+
+      <!-- Unenrolled Students -->
+      <div class="bg-white rounded-lg shadow p-6 text-center">
+        <h2 class="text-xl font-semibold mb-3">Unenrolled Students</h2>
+        <p class="text-5xl font-bold text-red-600">12</p>
+        <p class="text-gray-600 mt-2">Dropped or not enrolled</p>
+      </div>
+
+      <!-- Course Completion -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-xl font-semibold mb-4 text-center">Course Completion</h2>
+        <div class="w-full bg-gray-300 rounded-full h-8 overflow-hidden">
+          <div class="bg-blue-700 h-8 rounded-full text-white text-center font-semibold leading-8" style="width: 75%;">75%</div>
+        </div>
+        <p class="text-gray-600 mt-2 text-center">Course content covered</p>
+      </div>
+    </div>
+
+    <!-- Events & Assignments -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Upcoming Event -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-xl font-semibold mb-4">Upcoming Event</h2>
+        <p class="text-gray-800 font-semibold">Annual Science Fair</p>
+        <p class="text-gray-600 mt-1">Date: 15 August 2025</p>
+        <p class="text-gray-600 mt-1">Location: Auditorium</p>
+      </div>
+
+      <!-- Next Activity -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-xl font-semibold mb-4">Next Activity</h2>
+        <p class="text-gray-800 font-semibold">Group Project Presentation</p>
+        <p class="text-gray-600 mt-1">Due: 5 August 2025</p>
+      </div>
+
+      <!-- Assignment Submission -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-xl font-semibold mb-4">Assignment Submission</h2>
+        <p class="text-gray-800 font-semibold">Midterm Report</p>
+        <p class="text-gray-600 mt-1">Deadline: 10 August 2025</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

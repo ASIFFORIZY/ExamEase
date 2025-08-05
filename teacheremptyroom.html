@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teacher Routine | ExamEase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('mobileSidebar');
+      sidebar.classList.toggle('-translate-x-full');
+    }
+  </script>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen">
+
+  <!-- Mobile Top Bar -->
+  <header class="fixed top-0 left-0 w-full bg-blue-900 text-white p-4 flex justify-between items-center md:hidden z-50">
+    <div class="text-xl font-bold">ExamEase</div>
+    <button id="menu-btn" onclick="toggleSidebar()" class="focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+        <path d="M4 6h16M4 12h16M4 18h16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Mobile Sidebar -->
+  <div id="mobileSidebar" class="fixed top-0 left-0 w-64 h-full bg-blue-900 text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-40 md:hidden">
+    <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase</div>
+    <nav class="flex flex-col p-4 space-y-2">
+      <a href="teacherdashboard.html" class="py-2 px-4 rounded hover:bg-blue-700 ">Dashboard</a>
+      <a href="teacherexamroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Exam Routine</a>
+      <a href="teacherroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Teacher Routine</a>
+      <a href="teacherannouncement.html" class="py-2 px-4 rounded hover:bg-blue-700">Announcements</a>
+      <a href="teacheremptyroom.html" class="py-2 px-4 rounded bg-blue-700">View Empty Room</a>
+      <a href="index.html" class="py-2 px-4 rounded hover:bg-red-600">Logout</a>
+    </nav>
+  </div>
+
+  <!-- Desktop Sidebar -->
+  <aside class="hidden md:block w-64 bg-blue-900 text-white min-h-screen fixed top-0 left-0 pt-16">
+    <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase</div>
+    <nav class="flex flex-col p-4 space-y-2">
+      <a href="teacherdashboard.html" class="py-2 px-4 rounded hover:bg-blue-700 ">Dashboard</a>
+      <a href="teacherexamroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Exam Routine</a>
+      <a href="teacherroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Teacher Routine</a>
+      <a href="teacherannouncement.html" class="py-2 px-4 rounded hover:bg-blue-700">Announcements</a>
+      <a href="teacheremptyroom.html" class="py-2 px-4 rounded bg-blue-700">View Empty Room</a>
+      <a href="index.html" class="py-2 px-4 rounded hover:bg-red-600">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="flex-1 md:ml-64 p-6 w-full max-w-5xl mx-auto mt-16 md:mt-0">
+    <!-- Header -->
+    <header class="mb-6">
+      <h1 class="text-3xl font-bold text-blue-900">View Empty Rooms</h1>
+    </header>
+
+    <!-- Filter section -->
+    <section class="bg-white p-6 rounded shadow mb-8">
+      <h2 class="text-xl font-semibold mb-4">Filter Empty Rooms</h2>
+      <form id="filterForm" class="space-y-4 sm:flex sm:space-x-4 sm:space-y-0 items-end">
+        <div class="flex-1">
+          <label for="day" class="block text-gray-700 mb-1">Select Day</label>
+          <select id="day" class="w-full border p-2 rounded" required>
+            <option value="" disabled selected>Choose a day</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+          </select>
+        </div>
+        <div class="flex-1">
+          <label for="timeSlot" class="block text-gray-700 mb-1">Select Time Slot</label>
+          <select id="timeSlot" class="w-full border p-2 rounded" required>
+            <option value="" disabled selected>Choose a time slot</option>
+            <option value="8:30-9:30">8:30 AM - 9:30 AM</option>
+            <option value="9:30-10:30">9:30 AM - 10:30 AM</option>
+            <option value="10:30-11:30">10:30 AM - 11:30 AM</option>
+            <option value="11:30-12:30">11:30 AM - 12:30 PM</option>
+            <option value="12:30-1:30">12:30 PM - 1:30 PM</option>
+            <option value="1:30-2:30">1:30 PM - 2:30 PM</option>
+            <option value="2:30-3:30">2:30 PM - 3:30 PM</option>
+            <option value="3:30-4:30">3:30 PM - 4:30 PM</option>
+            <option value="4:30-5:30">4:30 PM - 5:30 PM</option>
+          </select>
+        </div>
+        <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded">
+          Filter
+        </button>
+      </form>
+    </section>
+
+    <!-- Empty Rooms Table -->
+    <section class="bg-white p-6 rounded shadow overflow-x-auto">
+      <h2 class="text-xl font-semibold mb-4">Empty Rooms</h2>
+      <table class="w-full table-auto border text-sm sm:text-base">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="p-2 border">Room Number</th>
+            <th class="p-2 border">Day</th>
+            <th class="p-2 border">Time Slot</th>
+            <th class="p-2 border">Remarks</th>
+          </tr>
+        </thead>
+        <tbody id="emptyRoomTable">
+          <tr>
+            <td colspan="4" class="p-4 text-center text-gray-600">
+              Please select day and time slot to view empty rooms.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script>
+    // Generate rooms from 101 to 1410 (14 floors * 10 rooms each)
+    function generateRoomNumbers() {
+      const rooms = [];
+      for (let floor = 1; floor <= 14; floor++) {
+        for (let roomNum = 1; roomNum <= 10; roomNum++) {
+          let room = floor.toString() + (roomNum < 10 ? "0" + roomNum : roomNum.toString());
+          rooms.push(room);
+        }
+      }
+      return rooms;
+    }
+
+    const rooms = generateRoomNumbers();
+
+    // Days excluding Friday
+    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Saturday", "Sunday"];
+
+    // Time slots
+    const timeSlots = [
+      "8:30-9:30",
+      "9:30-10:30",
+      "10:30-11:30",
+      "11:30-12:30",
+      "12:30-1:30",
+      "1:30-2:30",
+      "2:30-3:30",
+      "3:30-4:30",
+      "4:30-5:30"
+    ];
+
+    // Simulate empty rooms data array
+    const emptyRoomsData = [];
+
+    // Generate empty rooms data with 30% chance per slot
+    function generateEmptyRoomsData() {
+      emptyRoomsData.length = 0;
+      rooms.forEach(room => {
+        days.forEach(day => {
+          timeSlots.forEach(time => {
+            if (Math.random() < 0.3) {
+              emptyRoomsData.push({
+                room,
+                day,
+                time,
+                remarks: "Available"
+              });
+            }
+          });
+        });
+      });
+    }
+
+    generateEmptyRoomsData();
+
+    const filterForm = document.getElementById('filterForm');
+    const emptyRoomTable = document.getElementById('emptyRoomTable');
+
+    // Render table rows
+    function renderTable(data) {
+      emptyRoomTable.innerHTML = '';
+
+      if (data.length === 0) {
+        emptyRoomTable.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-gray-600">No empty rooms found.</td></tr>`;
+        return;
+      }
+
+      data.forEach(item => {
+        emptyRoomTable.innerHTML += `
+          <tr>
+            <td class="p-2 border break-words max-w-xs">${item.room}</td>
+            <td class="p-2 border">${item.day}</td>
+            <td class="p-2 border">${item.time}</td>
+            <td class="p-2 border">${item.remarks}</td>
+          </tr>
+        `;
+      });
+    }
+
+    // Utility: pick random n items from array (3 to 6)
+    function getRandomSubset(arr, min = 3, max = 6) {
+      const count = Math.min(arr.length, Math.floor(Math.random() * (max - min + 1)) + min);
+      const shuffled = arr.slice().sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, count);
+    }
+
+    filterForm.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const selectedDay = document.getElementById('day').value;
+      const selectedTime = document.getElementById('timeSlot').value;
+
+      if (!selectedDay || !selectedTime) {
+        alert("Please select both day and time slot.");
+        return;
+      }
+
+      const filtered = emptyRoomsData.filter(room =>
+        room.day === selectedDay && room.time === selectedTime
+      );
+
+      const limitedRooms = getRandomSubset(filtered, 3, 6);
+
+      renderTable(limitedRooms);
+    });
+  </script>
+</body>
+</html>

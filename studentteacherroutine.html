@@ -3,20 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Teacher Routine | ExamEase</title>
+  <title>Student Dashboard | ExamEase</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    function toggleSidebar() {
-      const sidebar = document.getElementById('mobileSidebar');
-      sidebar.classList.toggle('-translate-x-full');
-    }
-
-    function showTeacherRoutine() {
-      const imageSection = document.getElementById('teacherRoutineImageSection');
-      imageSection.classList.remove('hidden');
-      imageSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  </script>
 </head>
 <body class="bg-gray-100 font-sans min-h-screen">
 
@@ -24,6 +12,7 @@
   <header class="fixed top-0 left-0 w-full bg-blue-900 text-white p-4 flex justify-between items-center md:hidden z-50">
     <div class="text-xl font-bold">ExamEase</div>
     <button onclick="toggleSidebar()" class="focus:outline-none">
+      <!-- Hamburger Icon -->
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current" viewBox="0 0 24 24">
         <path d="M4 6h16M4 12h16M4 18h16" stroke="white" stroke-width="2" stroke-linecap="round"/>
       </svg>
@@ -32,29 +21,31 @@
 
   <!-- Mobile Sidebar -->
   <div id="mobileSidebar" class="fixed top-0 left-0 w-64 h-full bg-blue-900 text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-40 md:hidden">
-    <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase</div>
+    <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase </div>
     <nav class="flex flex-col p-4 space-y-2">
-      <a href="teacherdashboard.html" class="py-2 px-4 rounded hover:bg-blue-700 ">Dashboard</a>
-      <a href="teacherexamroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Exam Routine</a>
-      <a href="teacherroutine.html" class="py-2 px-4 rounded bg-blue-700">Teacher Routine</a>
-      <a href="teacehrannouncement.html" class="py-2 px-4 rounded hover:bg-blue-700">Announcements</a>
-      <a href="teacehremptyroom.html" class="py-2 px-4 rounded hover:bg-blue-700">View Empty Room</a>
+      <a href="studentdashboard.html" class="py-2 px-4 rounded hover:bg-blue-700">Dashboard</a>
+      <a href="studentclassroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Class Routine</a>
+      <a href="studentexamroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Exam Routine</a>
+      <a href="studentteacherroutine.html" class="py-2 px-4 rounded bg-blue-700">Teacher Routine</a>
+      <a href="studentannouncement.html" class="py-2 px-4 rounded hover:bg-blue-700">Announcements</a>
       <a href="index.html" class="py-2 px-4 rounded hover:bg-red-600">Logout</a>
     </nav>
   </div>
 
-  <!-- Desktop Sidebar -->
-  <aside class="hidden md:block w-64 bg-blue-900 text-white min-h-screen fixed top-0 left-0 pt-16">
-    <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase</div>
-    <nav class="flex flex-col p-4 space-y-2">
-      <a href="teacherdashboard.html" class="py-2 px-4 rounded hover:bg-blue-700 ">Dashboard</a>
-      <a href="teacherexamroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Exam Routine</a>
-      <a href="teacherroutine.html" class="py-2 px-4 rounded bg-blue-700">Teacher Routine</a>
-      <a href="teacherannouncement.html" class="py-2 px-4 rounded hover:bg-blue-700">Announcements</a>
-      <a href="teacheremptyroom.html" class="py-2 px-4 rounded hover:bg-blue-700">View Empty Room</a>
-      <a href="index.html" class="py-2 px-4 rounded hover:bg-red-600">Logout</a>
-    </nav>
-  </aside>
+  <!-- Desktop Layout -->
+  <div class="flex pt-16 md:pt-0">
+    <!-- Desktop Sidebar -->
+    <aside class="hidden md:block w-64 bg-blue-900 text-white min-h-screen">
+      <div class="p-6 text-2xl font-bold border-b border-blue-700">ExamEase</div>
+      <nav class="flex flex-col p-4 space-y-2">
+        <a href="studentdashboard.html" class="py-2 px-4 rounded hover:bg-blue-700">Dashboard</a>
+        <a href="studentclassroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Class Routine</a>
+        <a href="studentexamroutine.html" class="py-2 px-4 rounded hover:bg-blue-700">Exam Routine</a>
+        <a href="studentteacherroutine.html" class="py-2 px-4 rounded bg-blue-700">Teacher Routine</a>
+        <a href="studentannouncement.html" class="py-2 px-4 rounded hover:bg-blue-700">Announcements</a>
+        <a href="index.html" class="py-2 px-4 rounded hover:bg-red-600">Logout</a>
+      </nav>
+    </aside>
 
     <!-- Main Content -->
     <main class="flex-1 p-6 flex justify-center">
@@ -83,6 +74,5 @@
       </div>
     </main>
   </div>
-
 </body>
 </html>
